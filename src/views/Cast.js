@@ -1,43 +1,47 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import { NavLink, Route } from 'react-router-dom';
-import AuthorBooks from '../components/AuthorBooks';
+import Reviews from './Reviews';
+import CastList from '../components/CastList';
 
 class Cast extends Component {
   state = {
-    authors: [],
+    cast: [],
   };
 
   async componentDidMount() {
+    const { movie_id } = this.props.match.params;
     const response = await Axios.get(
-      ' http://localhost:4040/authors?_embed=books',
+      `https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=4ba31ae74c8b6119033f94598087ffb2`,
     );
 
-    this.setState({ authors: response.data });
+    this.setState({ cast: response.data });
+    console.log('response.data', response.data);
   }
 
   render() {
     const { match } = this.props;
+    const { cast } = this.state;
 
     return (
       <>
-        <h1>Это страница авторов</h1>
+        <h1>Cast</h1>
 
         <ul>
-          {this.state.authors.map(author => (
-            <li key={author.id}>
-              <NavLink to={`${match.url}/${author.id}`}>{author.name}</NavLink>
+          {cast.map(actor => (
+            <li key={actor.id}>
+              <NavLink to={`${match.url}/${actor.id}`}>{actor.name}</NavLink>
             </li>
           ))}
         </ul>
 
         <Route
-          path={`${match.path}/:authorId`}
+          path={`${match.path}/:movieId/cast`}
           render={props => {
-            const bookId = Number(props.match.params.authorId);
-            const author = this.state.authors.find(({ id }) => id === bookId);
+            const movie_id = Number(props.match.params.movie_id);
+            const actor = cast.find(({ id }) => id === movie_id);
 
-            return author && <AuthorBooks {...props} books={author.books} />;
+            return actor && <Reviews {...props} CastList={actor.movie} />;
           }}
         />
       </>

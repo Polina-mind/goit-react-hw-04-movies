@@ -34,9 +34,9 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={HomePage} />
       <Route exact path="/movies" component={MoviesPage} />
-      <Route path="/movies/:movieId" component={MovieDetailsPage} />
-      <Route path="/movies/:movieId/cast" component={Cast} />
-      <Route path="/movies/:movieId/reviews" component={Reviews} />
+      <Route exact path="/movies/:movie_id" component={MovieDetailsPage} />
+      <Route path="/movies/:movie_id/cast" component={Cast} />
+      <Route path="/movies/:movie_id/reviews" component={Reviews} />
       <Route component={NotFoundView} />
     </Switch>
   </>
