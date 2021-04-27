@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import Axios from 'axios';
 
 class HomePage extends Component {
@@ -18,7 +18,8 @@ class HomePage extends Component {
   render() {
     const { match } = this.props;
     const { trendingMovies } = this.state;
-    console.log(trendingMovies);
+    // console.log(trendingMovies);
+    // console.log(this.props.match.url);
 
     return (
       <>
@@ -26,13 +27,13 @@ class HomePage extends Component {
         <ul>
           {trendingMovies.map(trendingMovie => (
             <li key={trendingMovie.id}>
-              <NavLink to={`${match.url}/${trendingMovie.id}`}>
+              <Link to={`${match.url}movies/${trendingMovie.id}`}>
                 {trendingMovie.title}
-              </NavLink>
+              </Link>
             </li>
           ))}
         </ul>
-        <Route
+        {/* <Route
           path={`${match.path}/:movieId`}
           render={props => {
             const movie_id = Number(props.match.params.movieId);
@@ -46,7 +47,7 @@ class HomePage extends Component {
               )
             );
           }}
-        />
+        /> */}
       </>
     );
   }

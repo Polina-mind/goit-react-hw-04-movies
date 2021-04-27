@@ -12,10 +12,11 @@ class MovieDetailsPage extends Component {
   };
 
   async componentDidMount() {
-    const { movieId } = this.props.match.params;
-    console.log(this.props.match.params);
+    const movie = this.props.match.params.movie_id;
+    console.log(movie);
+
     const response = await Axios.get(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=4ba31ae74c8b6119033f94598087ffb2`,
+      `https://api.themoviedb.org/3/movie/${movie}?api_key=4ba31ae74c8b6119033f94598087ffb2`,
     );
 
     this.setState({ ...response.data });
@@ -33,7 +34,7 @@ class MovieDetailsPage extends Component {
 
     return (
       <>
-        <h1>Movie {this.props.match.params.movieId}</h1>
+        <h1>Movie {this.props.match.params.movie_id}</h1>
         <img src={poster_path} alt="" />
         <h2>{title}</h2>
         <p>{release_date}</p>

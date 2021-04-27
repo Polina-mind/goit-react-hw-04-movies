@@ -1,0 +1,14 @@
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.NavLink {
+  font-size: 20px;
+  color: currentColor;
+}
+
+.NavLink--active {
+  color: rgb(112, 216, 138);
+}
