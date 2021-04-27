@@ -7,19 +7,20 @@ class MovieDetailsPage extends Component {
     title: null,
     poster_path: null,
     overview: null,
-    genre_ids: null,
+    genres: [],
     release_date: null,
   };
 
   async componentDidMount() {
-    const movie = this.props.match.params.movie_id;
-    console.log(movie);
+    const movieId = this.props.match.params.movie_id;
+    // console.log(movie);
 
     const response = await Axios.get(
-      `https://api.themoviedb.org/3/movie/${movie}?api_key=4ba31ae74c8b6119033f94598087ffb2`,
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=4ba31ae74c8b6119033f94598087ffb2`,
     );
 
     this.setState({ ...response.data });
+    console.log(this.state);
   }
 
   render() {
@@ -28,17 +29,27 @@ class MovieDetailsPage extends Component {
       title,
       poster_path,
       overview,
-      genre_ids,
+      genres,
       release_date,
     } = this.state;
 
     return (
       <>
-        <h1>Movie {this.props.match.params.movie_id}</h1>
         <img src={poster_path} alt="" />
-        <h2>{title}</h2>
-        <p>{release_date}</p>
+
+        <h2>
+          {title} ({release_date})
+        </h2>
+
+        <h3>Overview</h3>
         <p>{overview}</p>
+
+        <h3>Genres</h3>
+        {genres.map(genre => (
+          <li>{genre.name}</li>
+        ))}
+
+        <h4>Additional information</h4>
       </>
     );
   }
