@@ -10,13 +10,14 @@ class Cast extends Component {
   };
 
   async componentDidMount() {
-    const { movie_id } = this.props.match.params;
+    const movieId = this.props.match.params.movie_id;
+
     const response = await Axios.get(
-      `https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=4ba31ae74c8b6119033f94598087ffb2`,
+      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=4ba31ae74c8b6119033f94598087ffb2`,
     );
 
-    this.setState({ cast: response.data });
-    console.log('response.data', response.data);
+    this.setState({ cast: response.data.cast });
+    // console.log(this.state.cast);
   }
 
   render() {
@@ -26,7 +27,6 @@ class Cast extends Component {
     return (
       <>
         <h1>Cast</h1>
-
         <ul>
           {cast.map(actor => (
             <li key={actor.id}>
@@ -35,7 +35,7 @@ class Cast extends Component {
           ))}
         </ul>
 
-        <Route
+        {/* <Route
           path={`${match.path}/:movieId/cast`}
           render={props => {
             const movie_id = Number(props.match.params.movie_id);
@@ -43,7 +43,7 @@ class Cast extends Component {
 
             return actor && <Reviews {...props} CastList={actor.movie} />;
           }}
-        />
+        /> */}
       </>
     );
   }

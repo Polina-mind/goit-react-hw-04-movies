@@ -9,13 +9,13 @@ class Reviews extends Component {
   };
 
   async componentDidMount() {
-    const { movie_id } = this.props.match.params;
+    const movieId = this.props.match.params.movie_id;
     const response = await Axios.get(
-      `https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=4ba31ae74c8b6119033f94598087ffb2`,
+      `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=4ba31ae74c8b6119033f94598087ffb2`,
     );
 
-    this.setState({ reviews: response.data });
-    console.log(response.data);
+    this.setState({ reviews: response.data.results });
+    console.log(response.data.results);
   }
 
   render() {
@@ -26,15 +26,18 @@ class Reviews extends Component {
     return (
       <>
         <h1>Reviews</h1>
-        <ul>
-          {reviews.map(review => (
-            <li key={review.id}>
-              <NavLink to={`${match.url}/${review.id}`}>{review.name}</NavLink>
-            </li>
-          ))}
-        </ul>
 
-        <Route
+        {reviews.map(review => (
+          <ul>
+            <li>
+              <h5>Author: {review.author}</h5>
+              <p>{review.content} </p>
+              <span>{review.created_at}</span>
+            </li>
+          </ul>
+        ))}
+
+        {/* <Route
           path={`${match.path}/:movieId`}
           render={props => {
             const movie_id = Number(props.match.params.reviewId);
@@ -42,7 +45,7 @@ class Reviews extends Component {
 
             return review && <Cast {...props} Reviews={review.movies} />;
           }}
-        />
+        /> */}
       </>
     );
   }

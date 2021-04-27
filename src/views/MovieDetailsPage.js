@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Link, Route } from 'react-router-dom';
+// import Reviews from './Reviews';
+// import Cast from './Cast';
 import Axios from 'axios';
 
 class MovieDetailsPage extends Component {
@@ -21,9 +24,17 @@ class MovieDetailsPage extends Component {
 
     this.setState({ ...response.data });
     console.log(this.state);
+
+    this.changeYear();
   }
 
+  changeYear = () => {
+    const year = this.state.release_date.slice(0, 4);
+    this.setState({ release_date: year });
+  };
+
   render() {
+    const { match } = this.props;
     const {
       id,
       title,
@@ -50,6 +61,14 @@ class MovieDetailsPage extends Component {
         ))}
 
         <h4>Additional information</h4>
+        <ul>
+          <li>
+            <Link to={`${match.url}/cast`}>Cast</Link>
+          </li>
+          <li>
+            <Link to={`${match.url}/reviews`}>Reviews</Link>
+          </li>
+        </ul>
       </>
     );
   }
