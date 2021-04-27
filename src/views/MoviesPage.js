@@ -22,7 +22,7 @@ class MoviesPage extends Component {
   };
 
   async componentDidMount() {
-    console.log(this.state.searchQuery);
+    // console.log(this.state.searchQuery);
 
     if (this.state.searchQuery) {
       const response = await Axios.get(

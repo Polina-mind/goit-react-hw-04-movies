@@ -15,13 +15,13 @@ class Reviews extends Component {
     );
 
     this.setState({ reviews: response.data.results });
-    console.log(response.data.results);
+    // console.log(response.data.results);
   }
 
   render() {
     const { match } = this.props;
     const { reviews } = this.state;
-    console.log(reviews);
+    // console.log(reviews);
 
     return (
       <>
