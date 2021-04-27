@@ -35,7 +35,7 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={HomePage} />
       <Route exact path="/movies/:movie_id" component={MovieDetailsPage} />
-      <Route exact path="/movies" component={MoviesPage} />
+      <Route path="/movies" component={MoviesPage} />
       <Route path="/movies/:movie_id/cast" component={Cast} />
       <Route path="/movies/:movie_id/reviews" component={Reviews} />
       <Route component={NotFoundView} />
