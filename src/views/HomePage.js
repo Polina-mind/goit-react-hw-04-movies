@@ -33,21 +33,6 @@ class HomePage extends Component {
             </li>
           ))}
         </ul>
-        {/* <Route
-          path={`${match.path}/:movieId`}
-          render={props => {
-            const movie_id = Number(props.match.params.movieId);
-            const trendingMovie = this.state.trendingMovies.find(
-              ({ id }) => id === movie_id,
-            );
-
-            return (
-              trendingMovie && (
-                <HomePage {...props} TrendingMovies={trendingMovie.movies} />
-              )
-            );
-          }}
-        /> */}
       </>
     );
   }

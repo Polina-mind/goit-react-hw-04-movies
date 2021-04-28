@@ -17,7 +17,7 @@ class Cast extends Component {
     );
 
     this.setState({ cast: response.data.cast });
-    console.log(this.state.cast);
+    // console.log(this.state.cast);
   }
 
   render() {
@@ -40,16 +40,6 @@ class Cast extends Component {
             </li>
           ))}
         </ul>
-
-        {/* <Route
-          path={`${match.path}/:movieId/cast`}
-          render={props => {
-            const movie_id = Number(props.match.params.movie_id);
-            const actor = cast.find(({ id }) => id === movie_id);
-
-            return actor && <Reviews {...props} CastList={actor.movie} />;
-          }}
-        /> */}
       </>
     );
   }

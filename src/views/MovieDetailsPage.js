@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 // import Reviews from './Reviews';
 import Cast from './Cast';
+import Reviews from './Reviews';
 import Axios from 'axios';
 
 class MovieDetailsPage extends Component {
@@ -75,6 +76,7 @@ class MovieDetailsPage extends Component {
 
           <li>
             <Link to={`${match.url}/reviews`}>Reviews</Link>
+            <Route path={`${match.path}/reviews`} component={Reviews} />
           </li>
         </ul>
       </>

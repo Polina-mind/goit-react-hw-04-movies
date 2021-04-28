@@ -54,3 +54,9 @@
 .Actor {
   margin-bottom: 20px;
 }
+
+.SearchForm-input {
+  width: 250px;
+  margin-left: 15px;
+  margin-right: 10px;
+}

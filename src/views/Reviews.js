@@ -36,16 +36,6 @@ class Reviews extends Component {
             </li>
           </ul>
         ))}
-
-        {/* <Route
-          path={`${match.path}/:movieId`}
-          render={props => {
-            const movie_id = Number(props.match.params.reviewId);
-            const review = reviews.find(({ id }) => id === movie_id);
-
-            return review && <Cast {...props} Reviews={review.movies} />;
-          }}
-        /> */}
       </>
     );
   }
