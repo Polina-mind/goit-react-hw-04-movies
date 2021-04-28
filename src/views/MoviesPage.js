@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import MoviesPageView from './MoviesPageView';
 import Axios from 'axios';
 
 class MoviesPage extends Component {
@@ -8,19 +9,6 @@ class MoviesPage extends Component {
     movies: [],
     searchQuery: '',
   };
-
-  async componentDidMount() {
-    // console.log(this.state.searchQuery);
-
-    if (this.state.searchQuery) {
-      const response = await Axios.get(
-        `https://api.themoviedb.org/3/search/movie?api_key=4ba31ae74c8b6119033f94598087ffb2&query=${this.state.searchQuery}`,
-      );
-
-      this.setState({ movies: response.data.results });
-      console.log(response.data.results);
-    }
-  }
 
   handleChange = e => {
     this.setState({ searchQuery: e.currentTarget.value });
@@ -42,7 +30,7 @@ class MoviesPage extends Component {
 
     return (
       <>
-        <h1>Movies</h1>
+        <h1 className="Title">Movies</h1>
 
         <form className="SearchForm" onSubmit={() => this.handleSubmit}>
           <button type="submit" className="SearchForm-button">
@@ -60,14 +48,11 @@ class MoviesPage extends Component {
           />
         </form>
 
-        {searchQuery && movies && (
-          <ul>
-            {movies.map(movie => (
-              <li key={movie.id}>
-                <Link to={`${match.url}/${movie.id}`}>{movie.title}</Link>
-              </li>
-            ))}
-          </ul>
+        {searchQuery && (
+          <MoviesPageView
+            searchQuery={searchQuery}
+            movies={movies}
+          ></MoviesPageView>
         )}
       </>
     );

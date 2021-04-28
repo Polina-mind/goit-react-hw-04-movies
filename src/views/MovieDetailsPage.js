@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 // import Reviews from './Reviews';
-// import Cast from './Cast';
+import Cast from './Cast';
 import Axios from 'axios';
 
 class MovieDetailsPage extends Component {
@@ -46,25 +46,33 @@ class MovieDetailsPage extends Component {
 
     return (
       <>
-        <img src={poster_path} alt="" />
+        <div className="FilmInfo">
+          <img
+            src={`https://image.tmdb.org/t/p/w154${poster_path}`}
+            alt={title}
+            width="200"
+            className="Poster"
+          />
+          <div>
+            <h2 className="TitleName">
+              {title} ({release_date})
+            </h2>
+            <h3 className="TitleName">Overview</h3>
+            <p className="Overview">{overview}</p>
+            <h3 className="TitleName">Genres</h3>
+            {genres.map(genre => (
+              <li className="Genre">{genre.name}</li>
+            ))}
+          </div>
+        </div>
 
-        <h2>
-          {title} ({release_date})
-        </h2>
-
-        <h3>Overview</h3>
-        <p>{overview}</p>
-
-        <h3>Genres</h3>
-        {genres.map(genre => (
-          <li>{genre.name}</li>
-        ))}
-
-        <h4>Additional information</h4>
+        <h4 className="TitleName">Additional information</h4>
         <ul>
           <li>
             <Link to={`${match.url}/cast`}>Cast</Link>
+            <Route path={`${match.path}/cast`} component={Cast} />
           </li>
+
           <li>
             <Link to={`${match.url}/reviews`}>Reviews</Link>
           </li>

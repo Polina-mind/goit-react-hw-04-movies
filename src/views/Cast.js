@@ -17,7 +17,7 @@ class Cast extends Component {
     );
 
     this.setState({ cast: response.data.cast });
-    // console.log(this.state.cast);
+    console.log(this.state.cast);
   }
 
   render() {
@@ -26,10 +26,16 @@ class Cast extends Component {
 
     return (
       <>
-        <h1>Cast</h1>
+        <h1 className="Title">Cast</h1>
         <ul>
           {cast.map(actor => (
-            <li key={actor.id}>
+            <li key={actor.id} className="Actor">
+              <img
+                src={`https://image.tmdb.org/t/p/w154${actor.profile_path}`}
+                alt={actor.name}
+                width="120"
+                className="ActorPhoto"
+              ></img>
               <NavLink to={`${match.url}/${actor.id}`}>{actor.name}</NavLink>
             </li>
           ))}

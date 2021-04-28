@@ -10,7 +10,7 @@ import './App.css';
 
 const App = () => (
   <>
-    <ul>
+    <ul className="NavLinks">
       <li>
         <NavLink
           exact

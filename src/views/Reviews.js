@@ -25,7 +25,7 @@ class Reviews extends Component {
 
     return (
       <>
-        <h1>Reviews</h1>
+        <h1 className="Title">Reviews</h1>
 
         {reviews.map(review => (
           <ul>

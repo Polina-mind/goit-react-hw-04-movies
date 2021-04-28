@@ -1,14 +1,56 @@
-img {
+.FilmInfo {
+  display: flex;
+}
+
+.Poster {
+  margin-top: 15px;
+  margin-left: 15px;
+  max-width: 100%;
+  height: auto;
+}
+
+.ActorPhoto {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
+.NavLinks {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 15px;
+  border-bottom: 3px solid rgb(219, 214, 214);
+}
+
 .NavLink {
+  margin-right: 10px;
   font-size: 20px;
   color: currentColor;
 }
 
 .NavLink--active {
   color: rgb(112, 216, 138);
+}
+
+.Title {
+  margin-left: 15px;
+}
+
+.TitleName {
+  margin-left: 15px;
+}
+
+.Overview {
+  margin-left: 15px;
+  width: 700px;
+}
+
+.Genre {
+  display: inline;
+  margin-left: 15px;
+}
+
+.Actor {
+  margin-bottom: 20px;
 }

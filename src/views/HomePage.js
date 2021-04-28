@@ -23,7 +23,7 @@ class HomePage extends Component {
 
     return (
       <>
-        <h1>Home</h1>
+        <h1 className="Title">Trending Today</h1>
         <ul>
           {trendingMovies.map(trendingMovie => (
             <li key={trendingMovie.id}>
