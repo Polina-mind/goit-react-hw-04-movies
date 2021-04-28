@@ -9,18 +9,6 @@ class MoviesPage extends Component {
     searchQuery: '',
   };
 
-  handleChange = e => {
-    this.setState({ searchQuery: e.currentTarget.value });
-    // console.log(this.state.searchQuery);
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-
-    this.props.onSubmit(this.state.searchQuery);
-    this.setState({ searchQuery: '' });
-  };
-
   async componentDidMount() {
     // console.log(this.state.searchQuery);
 
@@ -30,19 +18,33 @@ class MoviesPage extends Component {
       );
 
       this.setState({ movies: response.data.results });
-      // console.log(response.data.results);
+      console.log(response.data.results);
     }
   }
 
+  handleChange = e => {
+    this.setState({ searchQuery: e.currentTarget.value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    this.props.onSubmit(this.state.searchQuery);
+
+    this.setState({ searchQuery: '' });
+    console.log(this.state.searchQuery);
+  };
+
   render() {
+    const { match } = this.props;
     const { movies, searchQuery } = this.state;
-    // console.log(searchQuery);
+    console.log(searchQuery);
 
     return (
       <>
         <h1>Movies</h1>
 
-        <form className="SearchForm" onSubmit={this.handleSubmit}>
+        <form className="SearchForm" onSubmit={() => this.handleSubmit}>
           <button type="submit" className="SearchForm-button">
             <span className="SearchForm-button-label">Search</span>
           </button>
@@ -58,16 +60,15 @@ class MoviesPage extends Component {
           />
         </form>
 
-        <ul>
-          {searchQuery &&
-            movies.map(movie => (
+        {searchQuery && movies && (
+          <ul>
+            {movies.map(movie => (
               <li key={movie.id}>
-                <Link to={`${this.props.match.url}/${movie.id}`}>
-                  {movie.title}
-                </Link>
+                <Link to={`${match.url}/${movie.id}`}>{movie.title}</Link>
               </li>
             ))}
-        </ul>
+          </ul>
+        )}
       </>
     );
   }
