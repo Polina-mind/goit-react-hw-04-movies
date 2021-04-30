@@ -17,22 +17,29 @@ class MoviesPage extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.onSubmit(this.state.searchQuery);
+    console.log(this.state.searchQuery);
+
+    if (this.state.searchQuery) {
+      Axios.get(
+        `https://api.themoviedb.org/3/search/movie?api_key=8d4e0a5a0c37d4780eefdf617d0feea1&query=${this.state.searchQuery}`,
+      ).then(response => {
+        this.setState({ movies: response.data.results });
+      });
+    }
 
     this.setState({ searchQuery: '' });
-    console.log(this.state.searchQuery);
   };
 
   render() {
     const { match } = this.props;
-    const { movies, searchQuery } = this.state;
-    console.log(searchQuery);
+    const { movies } = this.state;
+    console.log('movies', this.state.movies);
 
     return (
       <>
         <h1 className="Title">Movies</h1>
 
-        <form className="SearchForm" onSubmit={() => this.handleSubmit}>
+        <form className="SearchForm" onSubmit={this.handleSubmit}>
           <input
             className="SearchForm-input"
             type="text"
@@ -48,20 +55,16 @@ class MoviesPage extends Component {
           </button>
         </form>
 
-        {searchQuery && (
-          <MoviesPageView
-            searchQuery={searchQuery}
-            movies={movies}
-          ></MoviesPageView>
-        )}
+        <ul>
+          {movies.map(movie => (
+            <li key={movie.id}>
+              <Link to={`${match.url}/${movie.id}`}>{movie.title}</Link>
+            </li>
+          ))}
+        </ul>
       </>
     );
   }
 }
-
-MoviesPage.protoTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-};
 
 export default MoviesPage;
