@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import MoviesPageView from './MoviesPageView';
 import Axios from 'axios';
 
 class MoviesPage extends Component {
@@ -17,8 +15,6 @@ class MoviesPage extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    console.log(this.state.searchQuery);
-
     if (this.state.searchQuery) {
       Axios.get(
         `https://api.themoviedb.org/3/search/movie?api_key=8d4e0a5a0c37d4780eefdf617d0feea1&query=${this.state.searchQuery}`,
@@ -33,7 +29,6 @@ class MoviesPage extends Component {
   render() {
     const { match } = this.props;
     const { movies } = this.state;
-    console.log('movies', this.state.movies);
 
     return (
       <>

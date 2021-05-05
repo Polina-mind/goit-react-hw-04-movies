@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { NavLink, Route } from 'react-router-dom';
-import Cast from './Cast';
 
 class Reviews extends Component {
   state = {
@@ -19,7 +17,6 @@ class Reviews extends Component {
   }
 
   render() {
-    const { match } = this.props;
     const { reviews } = this.state;
     // console.log(reviews);
 

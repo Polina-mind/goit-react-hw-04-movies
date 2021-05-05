@@ -18,8 +18,6 @@ class HomePage extends Component {
   render() {
     const { match } = this.props;
     const { trendingMovies } = this.state;
-    // console.log(trendingMovies);
-    // console.log(this.props.match.url);
 
     return (
       <>

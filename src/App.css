@@ -1,5 +1,7 @@
 .FilmInfo {
   display: flex;
+  padding-bottom: 20px;
+  border-bottom: 3px solid rgb(219, 214, 214);
 }
 
 .Poster {
@@ -19,7 +21,8 @@
   display: flex;
   list-style: none;
   margin: 0;
-  padding: 15px;
+  padding-top: 15px;
+  padding-bottom: 20px;
   border-bottom: 3px solid rgb(219, 214, 214);
 }
 
@@ -59,4 +62,13 @@
   width: 250px;
   margin-left: 15px;
   margin-right: 10px;
+}
+
+.ActorName {
+  font-weight: 700;
+}
+
+.AddInfo {
+  padding-bottom: 20px;
+  border-bottom: 3px solid rgb(219, 214, 214);
 }

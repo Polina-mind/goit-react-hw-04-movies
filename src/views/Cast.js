@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { NavLink, Route } from 'react-router-dom';
-import Reviews from './Reviews';
-import CastList from '../components/CastList';
 
 class Cast extends Component {
   state = {
@@ -21,7 +18,6 @@ class Cast extends Component {
   }
 
   render() {
-    const { match } = this.props;
     const { cast } = this.state;
 
     return (
@@ -33,10 +29,10 @@ class Cast extends Component {
               <img
                 src={`https://image.tmdb.org/t/p/w154${actor.profile_path}`}
                 alt={actor.name}
-                width="120"
                 className="ActorPhoto"
               ></img>
-              <NavLink to={`${match.url}/${actor.id}`}>{actor.name}</NavLink>
+              {actor.profile_path && <p className="ActorName">{actor.name}</p>}
+              <p>{actor.character}</p>
             </li>
           ))}
         </ul>
