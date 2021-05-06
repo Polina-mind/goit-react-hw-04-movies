@@ -38,7 +38,6 @@ class MovieDetailsPage extends Component {
 
   onGoBack = () => {
     const { location, history } = this.props;
-
     history.push(location?.state?.from || '/');
   };
 
@@ -59,6 +58,7 @@ class MovieDetailsPage extends Component {
         <button type="button" className="GoBackButton" onClick={this.onGoBack}>
           Go Back
         </button>
+
         <div className="FilmInfo">
           <img
             src={`https://image.tmdb.org/t/p/w154${poster_path}`}
@@ -79,6 +79,7 @@ class MovieDetailsPage extends Component {
             ))}
           </div>
         </div>
+
         <h4 className="TitleName">Additional information</h4>
         <ul className="AddInfo">
           <li key={`${match.url}/cast`}>
