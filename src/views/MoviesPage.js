@@ -45,7 +45,7 @@ class MoviesPage extends Component {
             placeholder="Search..."
           />
 
-          <button type="submit" className="SearchForm-button">
+          <button type="submit" className="SearchFormButton">
             <span className="SearchForm-button-label">Search</span>
           </button>
         </form>

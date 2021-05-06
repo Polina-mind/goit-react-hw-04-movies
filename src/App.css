@@ -33,7 +33,7 @@
 }
 
 .NavLink--active {
-  color: rgb(112, 216, 138);
+  color: rgb(26, 163, 72);
 }
 
 .Title {
@@ -71,4 +71,24 @@
 .AddInfo {
   padding-bottom: 20px;
   border-bottom: 3px solid rgb(219, 214, 214);
+}
+
+.GoBackButton,
+.SearchFormButton {
+  margin: 15px 0 5px 15px;
+  background-color: rgb(157, 248, 169);
+  border-radius: 4px;
+}
+
+.SearchFormButton {
+  padding: 4px 15px;
+  margin: 0;
+}
+
+.GoBackButton:hover,
+.GoBackButton:focus,
+.SearchFormButton:hover,
+.SearchFormButton:focus {
+  cursor: pointer;
+  background-color: rgb(146, 240, 232);
 }

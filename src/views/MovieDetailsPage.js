@@ -36,6 +36,12 @@ class MovieDetailsPage extends Component {
     this.setState({ popularity: fixedPopularity });
   };
 
+  onGoBack = () => {
+    const { location, history } = this.props;
+
+    history.push(location?.state?.from || '/');
+  };
+
   render() {
     const { match } = this.props;
     const {
@@ -50,6 +56,9 @@ class MovieDetailsPage extends Component {
 
     return (
       <>
+        <button type="button" className="GoBackButton" onClick={this.onGoBack}>
+          Go Back
+        </button>
         <div className="FilmInfo">
           <img
             src={`https://image.tmdb.org/t/p/w154${poster_path}`}
