@@ -61,7 +61,7 @@ class MovieDetailsPage extends Component {
             <h2 className="TitleName">
               {title} ({release_date})
             </h2>
-            <p className="TitleName">Popularity: {popularity}%</p>
+            <p className="TitleName">Popularity: {popularity}</p>
             <h3 className="TitleName">Overview</h3>
             <p className="Overview">{overview}</p>
             <h3 className="TitleName">Genres</h3>
@@ -70,7 +70,6 @@ class MovieDetailsPage extends Component {
             ))}
           </div>
         </div>
-
         <h4 className="TitleName">Additional information</h4>
         <ul className="AddInfo">
           <li key={`${match.url}/cast`}>
