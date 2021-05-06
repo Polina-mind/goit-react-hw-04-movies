@@ -1,28 +1,10 @@
-.FilmInfo {
-  display: flex;
-  padding-bottom: 20px;
-  border-bottom: 3px solid rgb(219, 214, 214);
-}
-
-.Poster {
-  margin-top: 15px;
-  margin-left: 15px;
-  max-width: 100%;
-  height: auto;
-}
-
-.ActorPhoto {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
+/* App */
 
 .NavLinks {
   display: flex;
   list-style: none;
   margin: 0;
-  padding-top: 15px;
-  padding-bottom: 20px;
+  padding: 15px 0 20px 15px;
   border-bottom: 3px solid rgb(219, 214, 214);
 }
 
@@ -36,8 +18,45 @@
   color: rgb(26, 163, 72);
 }
 
+/* HomePage */
+
 .Title {
   margin-left: 15px;
+}
+
+/* MovieDetailsPage */
+
+.GoBackButton,
+.SearchFormButton {
+  margin: 15px 0 5px 15px;
+  background-color: rgb(157, 248, 169);
+  border-radius: 4px;
+}
+
+.SearchFormButton {
+  padding: 4px 15px;
+  margin: 0;
+}
+
+.GoBackButton:hover,
+.GoBackButton:focus,
+.SearchFormButton:hover,
+.SearchFormButton:focus {
+  cursor: pointer;
+  background-color: rgb(146, 240, 232);
+}
+
+.FilmInfo {
+  display: flex;
+  padding-bottom: 20px;
+  border-bottom: 3px solid rgb(219, 214, 214);
+}
+
+.Poster {
+  margin-top: 15px;
+  margin-left: 15px;
+  max-width: 100%;
+  height: auto;
 }
 
 .TitleName {
@@ -58,6 +77,19 @@
   margin-bottom: 20px;
 }
 
+.AddInfo {
+  padding-bottom: 20px;
+  border-bottom: 3px solid rgb(219, 214, 214);
+}
+
+/* Cast */
+
+.ActorPhoto {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .SearchForm-input {
   width: 250px;
   margin-left: 15px;
@@ -66,29 +98,4 @@
 
 .ActorName {
   font-weight: 700;
-}
-
-.AddInfo {
-  padding-bottom: 20px;
-  border-bottom: 3px solid rgb(219, 214, 214);
-}
-
-.GoBackButton,
-.SearchFormButton {
-  margin: 15px 0 5px 15px;
-  background-color: rgb(157, 248, 169);
-  border-radius: 4px;
-}
-
-.SearchFormButton {
-  padding: 4px 15px;
-  margin: 0;
-}
-
-.GoBackButton:hover,
-.GoBackButton:focus,
-.SearchFormButton:hover,
-.SearchFormButton:focus {
-  cursor: pointer;
-  background-color: rgb(146, 240, 232);
 }

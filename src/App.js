@@ -4,8 +4,6 @@ import HomePage from './views/HomePage';
 import MoviesPage from './views/MoviesPage';
 import NotFoundView from './views/NotFoundView';
 import MovieDetailsPage from './views/MovieDetailsPage';
-import Cast from './views/Cast';
-import Reviews from './views/Reviews';
 import './App.css';
 
 const App = () => (
@@ -36,8 +34,8 @@ const App = () => (
       <Route exact path="/" component={HomePage} />
       <Route path="/movies/:movie_id" component={MovieDetailsPage} />
       <Route path="/movies" component={MoviesPage} />
-      <Route path="/movies/:movie_id/cast" component={Cast} />
-      <Route path="/movies/:movie_id/reviews" component={Reviews} />
+      {/* <Route path="/movies/:movie_id/cast" component={Cast} />
+      <Route path="/movies/:movie_id/reviews" component={Reviews} /> */}
       <Route component={NotFoundView} />
     </Switch>
   </>
