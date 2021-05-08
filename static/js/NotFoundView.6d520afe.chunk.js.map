@@ -1,0 +1,1 @@
+{"version":3,"sources":["views/NotFoundView.js"],"names":["NotFoundView"],"mappings":"yIAAA,uBAMeA,UAJM,WACnB,OAAO","file":"static/js/NotFoundView.6d520afe.chunk.js","sourcesContent":["import React from 'react';\r\n\r\nconst NotFoundView = () => {\r\n  return <h1>404 - page not found</h1>;\r\n};\r\n\r\nexport default NotFoundView;\r\n"],"sourceRoot":""}
