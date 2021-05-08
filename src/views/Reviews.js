@@ -23,16 +23,17 @@ class Reviews extends Component {
     return (
       <>
         <h1 className="Title">Reviews</h1>
-
-        {reviews.map(review => (
+        {reviews && (
           <ul>
-            <li key={review.created_at}>
-              <h5>Author: {review.author}</h5>
-              <p>{review.content} </p>
-              <span>{review.created_at}</span>
-            </li>
+            {reviews.map(review => (
+              <li key={review.author}>
+                <h5>Author: {review.author}</h5>
+                <p>{review.content} </p>
+                <span>{review.created_at}</span>
+              </li>
+            ))}
           </ul>
-        ))}
+        )}
       </>
     );
   }

@@ -92,10 +92,30 @@ class MovieDetailsPage extends Component {
         <h4 className="TitleName">Additional information</h4>
         <ul className="AddInfo">
           <li key="Cast">
-            <Link to={`${match.url}/cast`}>Cast</Link>
+            <Link
+              to={{
+                pathname: `${match.url}/cast`,
+                state: {
+                  from: this.props.location,
+                },
+              }}
+              // to={`${match.url}/cast`}
+            >
+              Cast
+            </Link>
           </li>
           <li key="Reviews">
-            <Link to={`${match.url}/reviews`}>Reviews</Link>
+            <Link
+              to={{
+                pathname: `${match.url}/reviews`,
+                state: {
+                  from: this.props.location,
+                },
+              }}
+              // to={`${match.url}/reviews`}
+            >
+              Reviews
+            </Link>
           </li>
         </ul>
         <Suspense fallback={<p>Loading...</p>}>

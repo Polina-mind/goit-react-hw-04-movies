@@ -32,7 +32,6 @@ class HomePage extends Component {
                     from: this.props.location,
                   },
                 }}
-                // to={`${match.url}movies/${trendingMovie.id}`}
               >
                 {trendingMovie.title}
               </Link>
