@@ -46,7 +46,7 @@ const App = () => (
       </li>
     </ul>
 
-    <Suspense fallback={<h1>ЗАГРУЖАЕМ МАРШРУТ...</h1>}>
+    <Suspense fallback={<p>Loading...</p>}>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/movies/:movie_id" component={MovieDetailsPage} />

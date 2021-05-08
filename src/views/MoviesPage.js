@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Axios from 'axios';
 
 class MoviesPage extends Component {
@@ -53,7 +53,16 @@ class MoviesPage extends Component {
         <ul>
           {movies.map(movie => (
             <li key={movie.id}>
-              <Link to={`${match.url}/${movie.id}`}>{movie.title}</Link>
+              <Link
+                to={{
+                  pathname: `${match.url}/${movie.id}`,
+                  state: {
+                    from: this.props.location,
+                  },
+                }}
+              >
+                {movie.title}
+              </Link>
             </li>
           ))}
         </ul>
@@ -62,4 +71,4 @@ class MoviesPage extends Component {
   }
 }
 
-export default MoviesPage;
+export default withRouter(MoviesPage);

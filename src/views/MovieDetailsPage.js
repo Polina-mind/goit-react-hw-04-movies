@@ -38,13 +38,14 @@ class MovieDetailsPage extends Component {
 
   onGoBack = () => {
     const { location, history } = this.props;
+    console.log('location', location, history);
     history.push(location?.state?.from || '/');
   };
 
   render() {
     const { match } = this.props;
     const {
-      id,
+      // id,
       title,
       poster_path,
       overview,
@@ -75,7 +76,9 @@ class MovieDetailsPage extends Component {
             <p className="Overview">{overview}</p>
             <h3 className="TitleName">Genres</h3>
             {genres.map(genre => (
-              <li className="Genre">{genre.name}</li>
+              <li key={genre.name} className="Genre">
+                {genre.name}
+              </li>
             ))}
           </div>
         </div>
