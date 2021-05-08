@@ -1,8 +1,14 @@
+import { lazy, Suspense } from 'react';
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import Cast from './Cast';
-import Reviews from './Reviews';
+// import Cast from './Cast';
+// import Reviews from './Reviews';
 import Axios from 'axios';
+
+const Cast = lazy(() => import('./Cast.js' /* webpackChunkName: "Cast" */));
+const Reviews = lazy(() =>
+  import('./Reviews.js' /* webpackChunkName: "Reviews" */),
+);
 
 class MovieDetailsPage extends Component {
   state = {
@@ -38,7 +44,7 @@ class MovieDetailsPage extends Component {
 
   onGoBack = () => {
     const { location, history } = this.props;
-    console.log('location', location, history);
+    // console.log('location', location);
     history.push(location?.state?.from || '/');
   };
 
@@ -85,15 +91,17 @@ class MovieDetailsPage extends Component {
 
         <h4 className="TitleName">Additional information</h4>
         <ul className="AddInfo">
-          <li key={`${match.url}/cast`}>
+          <li key="Cast">
             <Link to={`${match.url}/cast`}>Cast</Link>
           </li>
-          <li key={`${match.url}/reviews`}>
+          <li key="Reviews">
             <Link to={`${match.url}/reviews`}>Reviews</Link>
           </li>
         </ul>
-        <Route path={`${match.path}/cast`} component={Cast} />
-        <Route path={`${match.path}/reviews`} component={Reviews} />
+        <Suspense fallback={<p>Loading...</p>}>
+          <Route path={`${match.path}/cast`} component={Cast} />
+          <Route path={`${match.path}/reviews`} component={Reviews} />
+        </Suspense>
       </>
     );
   }

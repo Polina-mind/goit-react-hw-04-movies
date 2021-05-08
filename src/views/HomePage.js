@@ -25,7 +25,15 @@ class HomePage extends Component {
         <ul>
           {trendingMovies.map(trendingMovie => (
             <li key={trendingMovie.id}>
-              <Link to={`${match.url}movies/${trendingMovie.id}`}>
+              <Link
+                to={{
+                  pathname: `${match.url}movies/${trendingMovie.id}`,
+                  state: {
+                    from: this.props.location,
+                  },
+                }}
+                // to={`${match.url}movies/${trendingMovie.id}`}
+              >
                 {trendingMovie.title}
               </Link>
             </li>

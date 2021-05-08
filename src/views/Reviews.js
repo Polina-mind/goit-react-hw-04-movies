@@ -26,7 +26,7 @@ class Reviews extends Component {
 
         {reviews.map(review => (
           <ul>
-            <li>
+            <li key={review.created_at}>
               <h5>Author: {review.author}</h5>
               <p>{review.content} </p>
               <span>{review.created_at}</span>
