@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
+import { fetchCast } from '../../services/getData';
+import './Cast.css';
 
 class Cast extends Component {
   state = {
     cast: [],
   };
 
-  async componentDidMount() {
-    const movieId = this.props.match.params.movie_id;
+  componentDidMount() {
+    const movieId = this.props.match.params.movieId;
 
-    const response = await Axios.get(
-      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=4ba31ae74c8b6119033f94598087ffb2`,
-    );
-
-    this.setState({ cast: response.data.cast });
-    // console.log(this.state.cast);
+    fetchCast(movieId).then(cast => this.setState({ cast: cast }));
   }
 
   render() {

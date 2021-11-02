@@ -1,36 +1,32 @@
-import { lazy, Suspense } from 'react';
-import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
-// import Cast from './Cast';
-// import Reviews from './Reviews';
+import React, { Component, Suspense } from 'react';
+import { Route } from 'react-router-dom';
 import Axios from 'axios';
-
-const Cast = lazy(() => import('./Cast.js' /* webpackChunkName: "Cast" */));
-const Reviews = lazy(() =>
-  import('./Reviews.js' /* webpackChunkName: "Reviews" */),
-);
+import MovieDetails from '../components/MovieDetails';
+import AddInfo from '../components/AddInfo';
+import Cast from '../components/Cast';
+import Reviews from '../components/Reviews';
 
 class MovieDetailsPage extends Component {
   state = {
     id: null,
-    title: null,
-    poster_path: null,
-    overview: null,
+    title: '',
+    poster_path: '',
+    overview: '',
     genres: [],
-    release_date: null,
-    popularity: null,
+    release_date: '',
+    popularity: 0,
+    isOpenCast: false,
+    isOpenReviews: false,
   };
 
   async componentDidMount() {
-    const movieId = this.props.match.params.movie_id;
+    const movieId = this.props.match.params.movieId;
 
     const response = await Axios.get(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=4ba31ae74c8b6119033f94598087ffb2`,
     );
 
     this.setState({ ...response.data });
-    // console.log(this.state);
-
     this.changeYear();
   }
 
@@ -42,22 +38,41 @@ class MovieDetailsPage extends Component {
     this.setState({ popularity: fixedPopularity });
   };
 
+  isOpen = keyName => {
+    this.setState({ [keyName]: !this.state[keyName] });
+
+    this.setState(prevState => {
+      if (keyName === 'isOpenCast' && prevState.isOpenReviews) {
+        return {
+          isOpenReviews: !prevState.isOpenReviews,
+        };
+      } else if (keyName === 'isOpenReviews' && prevState.isOpenCast) {
+        return {
+          isOpenCast: !prevState.isOpenCast,
+        };
+      }
+    });
+  };
+
   onGoBack = () => {
     const { location, history } = this.props;
-    // console.log('location', location);
+
     history.push(location?.state?.from || '/');
+    history.location.state = { query: location?.state?.query || '' };
+    // console.log(history.location);
   };
 
   render() {
     const { match } = this.props;
     const {
-      // id,
       title,
       poster_path,
       overview,
       genres,
       release_date,
       popularity,
+      isOpenCast,
+      isOpenReviews,
     } = this.state;
 
     return (
@@ -66,61 +81,28 @@ class MovieDetailsPage extends Component {
           Go Back
         </button>
 
-        <div className="FilmInfo">
-          <img
-            src={`https://image.tmdb.org/t/p/w154${poster_path}`}
-            alt={title}
-            width="200"
-            className="Poster"
-          />
-          <div>
-            <h2 className="TitleName">
-              {title} ({release_date})
-            </h2>
-            <p className="TitleName">Popularity: {popularity}</p>
-            <h3 className="TitleName">Overview</h3>
-            <p className="Overview">{overview}</p>
-            <h3 className="TitleName">Genres</h3>
-            {genres.map(genre => (
-              <li key={genre.name} className="Genre">
-                {genre.name}
-              </li>
-            ))}
-          </div>
-        </div>
+        <MovieDetails
+          title={title}
+          poster_path={poster_path}
+          overview={overview}
+          genres={genres}
+          release_date={release_date}
+          popularity={popularity}
+        />
 
-        <h4 className="TitleName">Additional information</h4>
-        <ul className="AddInfo">
-          <li key="Cast">
-            <Link
-              to={{
-                pathname: `${match.url}/cast`,
-                state: {
-                  from: this.props.location,
-                },
-              }}
-              // to={`${match.url}/cast`}
-            >
-              Cast
-            </Link>
-          </li>
-          <li key="Reviews">
-            <Link
-              to={{
-                pathname: `${match.url}/reviews`,
-                state: {
-                  from: this.props.location,
-                },
-              }}
-              // to={`${match.url}/reviews`}
-            >
-              Reviews
-            </Link>
-          </li>
-        </ul>
+        <AddInfo
+          title="Additional information"
+          isOpenCast={() => this.isOpen('isOpenCast')}
+          isOpenReviews={() => this.isOpen('isOpenReviews')}
+          url={match.url}
+        ></AddInfo>
+
         <Suspense fallback={<p>Loading...</p>}>
-          <Route path={`${match.path}/cast`} component={Cast} />
-          <Route path={`${match.path}/reviews`} component={Reviews} />
+          <Route path={`${match.path}/cast`} component={isOpenCast && Cast} />
+          <Route
+            path={`${match.path}/reviews`}
+            component={isOpenReviews && Reviews}
+          />
         </Suspense>
       </>
     );

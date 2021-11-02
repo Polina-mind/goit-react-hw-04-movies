@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import Axios from 'axios';
+import SearchForm from '../components/SearchForm';
+import MoviesList from '../components/MoviesList';
+import { fetchMoviesBySearch } from '../services/getData';
 
 class MoviesPage extends Component {
   state = {
@@ -8,67 +9,52 @@ class MoviesPage extends Component {
     searchQuery: '',
   };
 
-  handleChange = e => {
-    this.setState({ searchQuery: e.currentTarget.value });
-  };
+  componentDidMount() {
+    const { location } = this.props;
 
-  handleSubmit = e => {
-    e.preventDefault();
+    if (location.state && location.state.query) {
+      const query = location.state.query;
 
-    if (this.state.searchQuery) {
-      Axios.get(
-        `https://api.themoviedb.org/3/search/movie?api_key=8d4e0a5a0c37d4780eefdf617d0feea1&query=${this.state.searchQuery}`,
-      ).then(response => {
-        this.setState({ movies: response.data.results });
-      });
+      fetchMoviesBySearch(query).then(moviesBySearch =>
+        this.setState({
+          movies: moviesBySearch,
+          searchQuery: query,
+        }),
+      );
     }
+  }
 
-    this.setState({ searchQuery: '' });
+  formSubmitHandler = query => {
+    if (query) {
+      fetchMoviesBySearch(query).then(moviesBySearch =>
+        this.setState({
+          movies: moviesBySearch,
+          searchQuery: query,
+        }),
+      );
+    }
   };
 
   render() {
+    const { movies, searchQuery } = this.state;
     const { match } = this.props;
-    const { movies } = this.state;
 
     return (
       <>
         <h1 className="Title">Movies</h1>
 
-        <form className="SearchForm" onSubmit={this.handleSubmit}>
-          <input
-            className="SearchForm-input"
-            type="text"
-            value={this.state.searchQuery}
-            onChange={this.handleChange}
-            autoComplete="off"
-            autoFocus
-            placeholder="Search..."
+        <SearchForm onSubmit={this.formSubmitHandler} />
+
+        {movies.length > 0 && (
+          <MoviesList
+            movies={movies}
+            url={match.url}
+            searchQuery={searchQuery}
           />
-
-          <button type="submit" className="SearchFormButton">
-            <span className="SearchForm-button-label">Search</span>
-          </button>
-        </form>
-
-        <ul>
-          {movies.map(movie => (
-            <li key={movie.id}>
-              <Link
-                to={{
-                  pathname: `${match.url}/${movie.id}`,
-                  state: {
-                    from: this.props.location,
-                  },
-                }}
-              >
-                {movie.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        )}
       </>
     );
   }
 }
 
-export default withRouter(MoviesPage);
+export default MoviesPage;

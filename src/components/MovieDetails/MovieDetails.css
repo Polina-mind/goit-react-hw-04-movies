@@ -1,0 +1,28 @@
+/* MovieDetailsPage */
+
+.FilmInfo {
+  display: flex;
+  padding-bottom: 20px;
+  border-bottom: 3px solid rgb(219, 214, 214);
+}
+
+.Poster {
+  margin-top: 15px;
+  margin-left: 15px;
+  max-width: 100%;
+  height: auto;
+}
+
+.TitleName {
+  margin-left: 15px;
+}
+
+.Overview {
+  margin-left: 15px;
+  width: 700px;
+}
+
+.Genre {
+  display: inline;
+  margin-left: 15px;
+}

@@ -1,0 +1,19 @@
+/* Cast */
+
+.Title {
+  margin-left: 15px;
+}
+
+.Actor {
+  margin-bottom: 20px;
+}
+
+.ActorPhoto {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.ActorName {
+  font-weight: 700;
+}

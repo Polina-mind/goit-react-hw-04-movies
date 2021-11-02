@@ -1,0 +1,22 @@
+.SearchForm-input {
+  width: 250px;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+.SearchFormButton {
+  margin: 15px 0 5px 15px;
+  background-color: rgb(157, 248, 169);
+  border-radius: 4px;
+}
+
+.SearchFormButton {
+  padding: 4px 15px;
+  margin: 0;
+}
+
+.SearchFormButton:hover,
+.SearchFormButton:focus {
+  cursor: pointer;
+  background-color: rgb(146, 240, 232);
+}

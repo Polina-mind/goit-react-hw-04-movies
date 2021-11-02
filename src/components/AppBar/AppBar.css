@@ -1,0 +1,17 @@
+.NavLinks {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 15px 0 20px 15px;
+  border-bottom: 3px solid rgb(219, 214, 214);
+}
+
+.NavLink {
+  margin-right: 10px;
+  font-size: 20px;
+  color: currentColor;
+}
+
+.NavLink--active {
+  color: rgb(26, 163, 72);
+}

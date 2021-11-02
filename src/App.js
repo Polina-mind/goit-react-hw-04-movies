@@ -1,6 +1,6 @@
-import { lazy, Suspense } from 'react';
-import React from 'react';
-import { Route, NavLink, Switch } from 'react-router-dom';
+import React, { lazy, Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import AppBar from './components/AppBar';
 // import HomePage from './views/HomePage';
 // import MoviesPage from './views/MoviesPage';
 // import MovieDetailsPage from './views/MovieDetailsPage';
@@ -24,36 +24,14 @@ const NotFoundView = lazy(() =>
 
 const App = () => (
   <>
-    <ul className="NavLinks">
-      <li>
-        <NavLink
-          exact
-          to="/"
-          className="NavLink"
-          activeClassName="NavLink--active"
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/movies"
-          className="NavLink"
-          activeClassName="NavLink--active"
-        >
-          Movies
-        </NavLink>
-      </li>
-    </ul>
+    <AppBar />
 
     <Suspense fallback={<p>Loading...</p>}>
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/movies/:movie_id" component={MovieDetailsPage} />
-        <Route path="/movies" component={MoviesPage} />
-        {/* <Route path="/movies/:movie_id/cast" component={Cast} />
-        <Route path="/movies/:movie_id/reviews" component={Reviews} /> */}
-        <Route path="//" component={NotFoundView} />
+        <Route exact path="/movies" component={MoviesPage} />
+        <Route path="/movies/:movieId" component={MovieDetailsPage} />
+        <Route component={NotFoundView} />
       </Switch>
     </Suspense>
   </>

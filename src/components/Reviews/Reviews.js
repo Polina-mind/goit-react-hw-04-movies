@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
+import { fetchReviews } from '../../services/getData';
+import './Reviews.css';
 
 class Reviews extends Component {
   state = {
@@ -7,26 +8,21 @@ class Reviews extends Component {
   };
 
   async componentDidMount() {
-    const movieId = this.props.match.params.movie_id;
-    const response = await Axios.get(
-      `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=4ba31ae74c8b6119033f94598087ffb2`,
-    );
+    const movieId = this.props.match.params.movieId;
 
-    this.setState({ reviews: response.data.results });
-    // console.log(response.data.results);
+    fetchReviews(movieId).then(reviews => this.setState({ reviews: reviews }));
   }
 
   render() {
     const { reviews } = this.state;
-    // console.log(reviews);
 
     return (
       <>
         <h1 className="Title">Reviews</h1>
-        {reviews && (
+        {reviews.length > 0 && (
           <ul>
             {reviews.map(review => (
-              <li key={review.author}>
+              <li key={review.created_at}>
                 <h5>Author: {review.author}</h5>
                 <p>{review.content} </p>
                 <span>{review.created_at}</span>
@@ -34,6 +30,7 @@ class Reviews extends Component {
             ))}
           </ul>
         )}
+        {reviews.length === 0 && <p className="Text">There are no reviews</p>}
       </>
     );
   }
