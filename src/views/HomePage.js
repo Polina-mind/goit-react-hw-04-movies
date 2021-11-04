@@ -5,28 +5,38 @@ import { fetchTrendMovies } from '../services/getData';
 class HomePage extends Component {
   state = {
     movies: [],
+    isLoading: false,
   };
 
   componentDidMount() {
+    this.setState({ isLoading: true });
+
     fetchTrendMovies().then(trendMovies =>
-      this.setState({ movies: trendMovies }),
+      this.setState({
+        movies: trendMovies,
+        isLoading: false,
+      }),
     );
   }
 
   render() {
-    const { movies } = this.state;
+    const { movies, isLoading } = this.state;
     const { match, location } = this.props;
 
     return (
       <>
         <h1 className="Title">Trending Today</h1>
 
-        {movies.length > 0 && (
-          <MoviesList
-            movies={movies}
-            url={`${match.url}movies`}
-            location={location}
-          />
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          movies.length > 0 && (
+            <MoviesList
+              movies={movies}
+              url={`${match.url}movies`}
+              location={location}
+            />
+          )
         )}
       </>
     );
