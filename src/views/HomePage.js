@@ -11,12 +11,13 @@ class HomePage extends Component {
   componentDidMount() {
     this.setState({ isLoading: true });
 
-    fetchTrendMovies().then(trendMovies =>
-      this.setState({
-        movies: trendMovies,
-        isLoading: false,
-      }),
-    );
+    fetchTrendMovies()
+      .then(trendMovies =>
+        this.setState({
+          movies: trendMovies,
+        }),
+      )
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   render() {

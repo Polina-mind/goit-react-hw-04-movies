@@ -18,24 +18,29 @@ class MoviesPage extends Component {
 
       this.setState({ isLoading: true });
 
-      fetchMoviesBySearch(query).then(moviesBySearch =>
-        this.setState({
-          movies: moviesBySearch,
-          searchQuery: query,
-          isLoading: false,
-        }),
-      );
+      fetchMoviesBySearch(query)
+        .then(moviesBySearch =>
+          this.setState({
+            movies: moviesBySearch,
+            searchQuery: query,
+          }),
+        )
+        .finally(() => this.setState({ isLoading: false }));
     }
   }
 
   formSubmitHandler = query => {
     if (query) {
-      fetchMoviesBySearch(query).then(moviesBySearch =>
-        this.setState({
-          movies: moviesBySearch,
-          searchQuery: query,
-        }),
-      );
+      this.setState({ isLoading: true });
+
+      fetchMoviesBySearch(query)
+        .then(moviesBySearch =>
+          this.setState({
+            movies: moviesBySearch,
+            searchQuery: query,
+          }),
+        )
+        .finally(() => this.setState({ isLoading: false }));
     }
   };
 
