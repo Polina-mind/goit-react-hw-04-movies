@@ -21,11 +21,13 @@ class HomePage extends Component {
       <>
         <h1 className="Title">Trending Today</h1>
 
-        <MoviesList
-          movies={movies}
-          url={`${match.url}movies`}
-          location={location}
-        />
+        {movies.length > 0 && (
+          <MoviesList
+            movies={movies}
+            url={`${match.url}movies`}
+            location={location}
+          />
+        )}
       </>
     );
   }
