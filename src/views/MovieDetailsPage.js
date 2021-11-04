@@ -26,7 +26,11 @@ class MovieDetailsPage extends Component {
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=4ba31ae74c8b6119033f94598087ffb2`,
     );
 
-    this.setState({ ...response.data });
+    this.setState({
+      ...response.data,
+      location: this.props.location.state.from,
+      query: this.props.location.state.query,
+    });
     this.changeYear();
   }
 
@@ -55,11 +59,10 @@ class MovieDetailsPage extends Component {
   };
 
   onGoBack = () => {
-    const { location, history } = this.props;
+    const { history } = this.props;
 
-    history.push(location?.state?.from || '/');
-    history.location.state = { query: location?.state?.query || '' };
-    // console.log(history.location);
+    history.push(this.state?.location || '/');
+    history.location.state = { query: this.state?.query || '' };
   };
 
   render() {

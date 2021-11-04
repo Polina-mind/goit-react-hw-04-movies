@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './AddInfo.css';
 
-const AddInfo = ({ title, isOpenCast, isOpenReviews, url, location }) => {
+const AddInfo = ({ title, isOpenCast, isOpenReviews, url }) => {
   return (
     <>
       <h4 className="TitleName">{title}</h4>
@@ -13,9 +13,6 @@ const AddInfo = ({ title, isOpenCast, isOpenReviews, url, location }) => {
           <Link
             to={{
               pathname: `${url}/cast`,
-              // state: {
-              //   from: location,
-              // },
             }}
           >
             Cast
@@ -26,9 +23,6 @@ const AddInfo = ({ title, isOpenCast, isOpenReviews, url, location }) => {
           <Link
             to={{
               pathname: `${url}/reviews`,
-              // state: {
-              //   from: location,
-              // },
             }}
           >
             Reviews
@@ -48,7 +42,6 @@ AddInfo.propTypes = {
   isOpenCast: PropTypes.func.isRequired,
   isOpenReviews: PropTypes.func.isRequired,
   url: PropTypes.string.isRequired,
-  location: PropTypes.object,
 };
 
 export default AddInfo;

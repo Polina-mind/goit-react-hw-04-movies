@@ -32,7 +32,7 @@ MoviesList.defaultProps = {
 MoviesList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
   url: PropTypes.string.isRequired,
-  // location: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   searchQuery: PropTypes.string,
 };
 
