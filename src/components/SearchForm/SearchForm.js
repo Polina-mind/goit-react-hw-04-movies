@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import './SearchForm.css';
 
 class SearchForm extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   state = {
     searchQuery: '',
   };
@@ -38,9 +42,5 @@ class SearchForm extends Component {
     );
   }
 }
-
-SearchForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
 
 export default SearchForm;
