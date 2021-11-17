@@ -4,11 +4,16 @@ import './SearchForm.css';
 
 class SearchForm extends Component {
   static propTypes = {
+    searchQuery: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
   };
 
+  // static defaultProps = {
+  //   searchQuery: '',
+  // };
+
   state = {
-    searchQuery: '',
+    searchQuery: this.props.searchQuery,
   };
 
   handleChange = e => {
@@ -19,16 +24,18 @@ class SearchForm extends Component {
     e.preventDefault();
 
     this.props.onSubmit(this.state.searchQuery);
-    this.setState({ searchQuery: '' });
+    // this.setState({ searchQuery: '' });
   };
 
   render() {
+    const { searchQuery } = this.state;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <input
           className="SearchForm-input"
           type="text"
-          value={this.searchQuery}
+          value={searchQuery}
           onChange={this.handleChange}
           autoComplete="off"
           autoFocus

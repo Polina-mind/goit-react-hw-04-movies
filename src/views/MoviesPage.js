@@ -13,10 +13,10 @@ class MoviesPage extends Component {
   componentDidMount() {
     const { location } = this.props;
 
-    if (location.state && location.state.query) {
+    if (location.state?.query) {
       const query = location.state.query;
 
-      this.setState({ isLoading: true });
+      this.setState({ searchQuery: query, isLoading: true });
 
       fetchMoviesBySearch(query)
         .then(moviesBySearch =>
@@ -42,16 +42,27 @@ class MoviesPage extends Component {
         )
         .finally(() => this.setState({ isLoading: false }));
     }
+
+    if (query === '') {
+      this.setState({
+        movies: [],
+      });
+    }
   };
 
   render() {
     const { movies, searchQuery, isLoading } = this.state;
-    const { match } = this.props;
+    const { match, location } = this.props;
 
     return (
       <>
         <h1 className="Title">Movies</h1>
-        <SearchForm onSubmit={this.formSubmitHandler} />
+        <SearchForm
+          searchQuery={
+            location.state?.query ? location.state.query : searchQuery
+          }
+          onSubmit={this.formSubmitHandler}
+        />
 
         {isLoading ? (
           <p>Loading...</p>
